@@ -1,0 +1,70 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Laba_1" Height="400" Width="150">
+    <Grid>
+        
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+			<RowDefinition></RowDefinition>
+
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Image 
+			Margin="0,0,0,0">
+			<Image.Source>
+				<FormatConvertedBitmap Source="C:\Users\gumbe\source\repos\WpfApp1\WpfApp1\image\dragon.png"/>
+			</Image.Source>
+		</Image>
+        
+		<ComboBox 
+			SelectionChanged="ComboBox_SelectionChanged" 
+			DropDownClosed="ComboBox_DropDownClosed"
+			Name="Quest" 
+			VerticalAlignment="Bottom" 
+			Height="22" 
+			Width="130" 
+			Grid.Row="0" 
+			Grid.Column="0" 
+			ScrollViewer.VerticalScrollBarVisibility="Visible" 
+			MaxDropDownHeight="150"
+			SelectedIndex="0"
+			>
+			<ComboBoxItem></ComboBoxItem>
+			<ComboBoxItem>Number 1</ComboBoxItem>
+			<ComboBoxItem>Number 2</ComboBoxItem>
+			<ComboBoxItem>Number 3</ComboBoxItem>
+			<ComboBoxItem>Number 4</ComboBoxItem>
+			<ComboBoxItem>Number 5</ComboBoxItem>
+			<ComboBoxItem>Number 6</ComboBoxItem>
+			<ComboBoxItem>Number 7</ComboBoxItem>
+			<ComboBoxItem>Number 8</ComboBoxItem>
+			<ComboBoxItem>Number 9</ComboBoxItem>
+			<ComboBoxItem>Number 10</ComboBoxItem>
+			<ComboBoxItem>Number 11</ComboBoxItem>
+			<ComboBoxItem>Number 12</ComboBoxItem>
+			<ComboBoxItem>Number 13</ComboBoxItem>
+			<ComboBoxItem>Number 14</ComboBoxItem>
+			<ComboBoxItem>Number 15</ComboBoxItem>
+			<ComboBoxItem>Number 16</ComboBoxItem>
+			<ComboBoxItem>Number 17</ComboBoxItem>
+			<ComboBoxItem>Number 18</ComboBoxItem>
+			<ComboBoxItem>Number 19</ComboBoxItem>
+			<ComboBoxItem>Number 20</ComboBoxItem>
+			<ComboBoxItem>Number 21</ComboBoxItem>
+			<ComboBoxItem>Number 22</ComboBoxItem>
+			<ComboBoxItem>Number 23</ComboBoxItem>
+			<ComboBoxItem>Number 24</ComboBoxItem>
+		</ComboBox>
+        
+        
+
+	</Grid>
+</Window>
