@@ -1,0 +1,204 @@
+﻿<Window x:Class="WpfApp5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp5"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <materialDesign:Card
+            Background="#1E1E1E">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="14"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+                <Run Text="TCP/" Foreground="#1E1E1E" FontWeight="DemiBold"/><Run Text="client" Foreground="#1E1E1E"/>
+            </TextBlock>
+
+            <Button
+                Grid.Column="5"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                Width="30"
+                Height="30"
+                BorderThickness="0"
+                Padding="0"
+                Click="Button_Exit">
+                <materialDesign:PackIcon
+                    Foreground="Salmon"
+                    Kind="Close">
+                </materialDesign:PackIcon>
+            </Button>
+
+            <Rectangle
+                Grid.RowSpan="5"
+                Fill="Salmon"
+                Panel.ZIndex="-1">
+            </Rectangle>
+
+            <TextBox
+                materialDesign:HintAssist.Hint="IP"
+                materialDesign:HintAssist.Foreground="#1E1E1E"
+                materialDesign:HintAssist.Background="Salmon"
+                materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+                BorderThickness="1"
+                SelectionBrush="#1E1E1E"
+                CaretBrush="#1E1E1E"
+                BorderBrush="#1E1E1E"
+                Foreground="#1E1E1E"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Center"
+                Width="200"
+                Grid.Row="1"
+                FontSize="12"
+                Name="IP_Client">
+            </TextBox>
+
+            <TextBox
+                materialDesign:HintAssist.Hint="Port"
+                materialDesign:HintAssist.Foreground="#1E1E1E"
+                materialDesign:HintAssist.Background="Salmon"
+                materialDesign:TextFieldAssist.TextFieldCornerRadius="20"
+                BorderThickness="1"
+                SelectionBrush="#1E1E1E"
+                CaretBrush="#1E1E1E"
+                BorderBrush="#1E1E1E"
+                Foreground="#1E1E1E"
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                VerticalAlignment="Center"
+                Width="200"
+                Grid.Row="2"
+                FontSize="12"
+                Name="Port_Client">
+            </TextBox>
+
+            <Button
+                Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                Foreground="Salmon"
+                Background="#1E1E1E"
+                Content="Connect"
+                Width="120"
+                Grid.Row="3"
+                Name="Connect_Server"
+                Click="Button_Connect_Server">
+            </Button>
+
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                materialDesign:ButtonAssist.CornerRadius="15"
+                VerticalAlignment="Center"
+                BorderThickness="0"
+                Foreground="#1E1E1E"
+                Content="Disconnect"
+                Name="Disconnect_Server"
+                IsEnabled="False"
+                Width="120"
+                Grid.Row="4"
+                Click="Button_Disconnect_Server">
+            </Button>
+
+            <TextBox
+                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                BorderThickness="0"
+                VerticalContentAlignment="Top"
+                HorizontalContentAlignment="Left"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="3"
+                Background="#1E1E1E"
+                Foreground="Salmon"
+                CaretBrush="Salmon"
+                SelectionBrush="#1E1E1E"
+                FontSize="12"
+                IsReadOnly="True"
+                IsReadOnlyCaretVisible="True"
+                Name="Messages">
+            </TextBox>
+
+            <TextBox
+                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                BorderThickness="0"
+                VerticalContentAlignment="Top"
+                HorizontalContentAlignment="Left"
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Background="#1E1E1E"
+                Foreground="Salmon"
+                CaretBrush="Salmon"
+                SelectionBrush="#1E1E1E"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                MaxLength="500"
+                Name="Send_Message"
+                PreviewKeyDown="Button_Send_Enter">
+            </TextBox>
+
+            <Rectangle
+                Panel.ZIndex="1"
+                Grid.Column="1"
+                Grid.Row="3"
+                Grid.ColumnSpan="3"
+                Grid.RowSpan="4"
+                Height="1"
+                Fill="Salmon">
+            </Rectangle>
+
+            <StackPanel
+                Orientation="Horizontal"
+                Background="#1E1E1E"
+                Grid.Row="4"
+                Grid.Column="3">
+                <Button
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    Width="30"
+                    Height="30"
+                    BorderThickness="0"
+                    Padding="0"
+                    Margin="10"
+                    Name="Send"
+                    Click="Button_Send_Message">
+                    <materialDesign:PackIcon
+                    Foreground="Salmon"
+                    Kind="Send">
+                    </materialDesign:PackIcon>
+                </Button>
+            </StackPanel>
+            
+        </Grid>
+    </materialDesign:Card>
+</Window>
