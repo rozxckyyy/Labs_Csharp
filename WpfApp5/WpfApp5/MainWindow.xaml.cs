@@ -77,7 +77,6 @@ namespace WpfApp5
                     {
                         Load();
                         ServerIsConnect = true;
-                        Send.IsEnabled = true;
                         Connect_Server.IsEnabled = false;
                         Disconnect_Server.IsEnabled = true;
 

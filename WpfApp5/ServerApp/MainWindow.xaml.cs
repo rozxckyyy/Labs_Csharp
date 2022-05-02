@@ -59,13 +59,13 @@ namespace ServerApp
                     {
                         Server = new SimpleTcpServer(FullAdress);
 
-                        Messages.Text += $"{Environment.NewLine}$Server started";
+                        Messages.Text += $"{Environment.NewLine}$Server started"; //delete this and make 
+                        Messages.Text = string.Empty;
 
                         Load();
                         Server.Start();
 
                         Stop_Server.IsEnabled = true;
-                        Send.IsEnabled = true;
                         Start_Server.IsEnabled = false;
                         ServerIsWork = Server.IsListening;
 
@@ -90,27 +90,6 @@ namespace ServerApp
             Unblock();
             Server.Stop();
         }
-        private void Button_Send(object sender, RoutedEventArgs e)
-        {
-            if (Server.IsListening)
-            {
-                if (!string.IsNullOrEmpty(Send_Message.Text) && lstIp.SelectedItem != null)
-                {
-                    try
-                    {
-                        foreach (string item in lstIp.Items)
-                        {
-                            Server.Send(item, $"[{FullAdress}]: {Send_Message.Text}");
-                        }
-                    }
-                    finally
-                    {
-                        Messages.Text += $"{Environment.NewLine}Server: {Send_Message.Text}";
-                        Send_Message.Text = string.Empty;
-                    }
-                }
-            }
-        }
         private void Button_Send_Enter(object sender, KeyEventArgs e)
         {
             if (Server.IsListening)
@@ -128,7 +107,7 @@ namespace ServerApp
                         }
                         finally 
                         {
-                            Messages.Text += $"{Environment.NewLine}Server: {Send_Message.Text}";
+                            My_Messages.Text += $"{Environment.NewLine}{Send_Message.Text}";
                             Send_Message.Text = string.Empty;
                             e.Handled = true;
                         }

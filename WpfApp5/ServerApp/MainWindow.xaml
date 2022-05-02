@@ -6,48 +6,53 @@
         xmlns:local="clr-namespace:ServerApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="400" Width="647"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{x:Null}"
+        Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
-    
-    
+
+
     <materialDesign:Card
-            Background="#1E1E1E">
+        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+        UniformCornerRadius="20"
+        Background="#1E1E1E">
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="88"/>
+                <RowDefinition Height="88"/>
+                <RowDefinition Height="87"/>
+                <RowDefinition Height="87"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="227"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="58.5"/>
+                <ColumnDefinition Width="141.5"/>
+                <ColumnDefinition Width="141.5"/>
+                <ColumnDefinition Width="58.5"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
+                Grid.ColumnSpan="2"
                 FontSize="14"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Center" Margin="77,16,76,15">
                 <Run Text="TCP/" Foreground="#1E1E1E" FontWeight="DemiBold"/><Run Text="server" Foreground="#1E1E1E"/>
             </TextBlock>
 
             <materialDesign:PopupBox
-                Grid.Column="2"
+                Grid.Column="4"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Margin="10"
+                Margin="0,12,10,12"
                 PopupUniformCornerRadius="0"
                 Foreground="#2D98D6"
                 materialDesign:ThemeAssist.Theme="Dark">
@@ -68,7 +73,7 @@
             </materialDesign:PopupBox>
 
             <Button
-                Grid.Column="3"
+                Grid.Column="5"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="Transparent"
@@ -76,20 +81,32 @@
                 Height="30"
                 BorderThickness="0"
                 Padding="0"
-                Click="Button_Exit">
+                Click="Button_Exit" Margin="10">
                 <materialDesign:PackIcon
                     Foreground="#2D98D6"
-                    Kind="Close">
+                    Kind="Close" 
+                    Height="20" 
+                    Width="20">
                 </materialDesign:PackIcon>
             </Button>
 
             <Rectangle
+                Grid.ColumnSpan="2"
                 Grid.RowSpan="5"
                 Fill="#2D98D6"
-                Panel.ZIndex="-1">
-            </Rectangle>
+                Panel.ZIndex="-1" 
+                RadiusX="20"
+                RadiusY="20"/>
+
+
+            <Rectangle
+                Grid.Column="1"
+                Grid.RowSpan="5"
+                Fill="#2D98D6"
+                Panel.ZIndex="-1"/>
 
             <TextBox
+                Grid.ColumnSpan="2"
                 Name="IP_Server"
                 materialDesign:HintAssist.Hint="IP-host"
                 materialDesign:HintAssist.Foreground="#1E1E1E"
@@ -104,10 +121,11 @@
                 VerticalAlignment="Center"
                 Width="200"
                 Grid.Row="1"
-                FontSize="12">
-            </TextBox>
+                FontSize="12"/>
+
 
             <TextBox
+                Grid.ColumnSpan="2"
                 Name="Port_Server"
                 materialDesign:HintAssist.Hint="Port"
                 materialDesign:HintAssist.Foreground="#1E1E1E"
@@ -122,10 +140,11 @@
                 VerticalAlignment="Center"
                 Width="200"
                 Grid.Row="2"
-                FontSize="12">
-            </TextBox>
+                FontSize="12"/>
+
 
             <Button
+                Grid.ColumnSpan="2"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 VerticalAlignment="Center"
@@ -136,10 +155,11 @@
                 Width="120"
                 Grid.Row="3"
                 Name="Start_Server"
-                Click="Button_Start_Server">
-            </Button>
+                Click="Button_Start_Server"/>
+
 
             <Button
+                Grid.ColumnSpan="2"
                 Style="{StaticResource MaterialDesignFlatButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 materialDesign:ButtonAssist.CornerRadius="15"
@@ -151,8 +171,8 @@
                 IsEnabled="False"
                 Width="120"
                 Grid.Row="4"
-                Click="Button_Stop_Server">
-            </Button>
+                Click="Button_Stop_Server"/>
+
 
             <TextBox
                 Name="Messages"
@@ -161,18 +181,39 @@
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Left"
                 Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.RowSpan="3"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 Background="#1E1E1E"
-                Foreground="#2D98D6"
-                CaretBrush="#2D98D6"
-                SelectionBrush="#1E1E1E"
+                Foreground="White"
+                CaretBrush="Transparent"
+                SelectionBrush="White"
+                FontStretch="UltraExpanded"
                 FontSize="12"
                 IsReadOnly="True"
-                IsReadOnlyCaretVisible="True">
-            </TextBox>
-            
+                IsReadOnlyCaretVisible="True"/>
+
+
+            <TextBox
+                Name="My_Messages"
+                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                BorderThickness="0"
+                VerticalContentAlignment="Top"
+                HorizontalContentAlignment="Right"
+                Grid.Row="1"
+                Grid.Column="4"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="4" 
+                Background="#1E1E1E"
+                Foreground="White"
+                CaretBrush="Transparent"
+                SelectionBrush="White"
+                FontStretch="UltraExpanded"
+                FontSize="12"
+                IsReadOnly="True"
+                IsReadOnlyCaretVisible="True"/>
+
+
             <TextBox
                 Name="Send_Message"
                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
@@ -180,50 +221,28 @@
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Left"
                 Grid.Row="4"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Background="#1E1E1E"
-                Foreground="#2D98D6"
-                CaretBrush="#2D98D6"
-                SelectionBrush="#1E1E1E"
+                Grid.Column="2"
+                Grid.ColumnSpan="4"
+                Background="Transparent"
+                Foreground="White"
+                CaretBrush="White"
+                SelectionBrush="White"
                 AcceptsReturn="True"
                 TextWrapping="Wrap"
                 MaxLength="500"
-                PreviewKeyDown="Button_Send_Enter">
-            </TextBox>
+                PreviewKeyDown="Button_Send_Enter"/>
+
 
             <Rectangle
                 Panel.ZIndex="1"
                 Grid.Column="1"
                 Grid.Row="3"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="5"
                 Grid.RowSpan="4"
                 Height="1"
-                Fill="#2D98D6">
-            </Rectangle>
+                Fill="#2D98D6"/>
 
-            <StackPanel
-                Orientation="Horizontal"
-                Background="#1E1E1E"
-                Grid.Row="4"
-                Grid.Column="3">
-                <Button
-                    Name="Send"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Background="Transparent"
-                    Width="30"
-                    Height="30"
-                    BorderThickness="0"
-                    Padding="0"
-                    Margin="10"
-                    Click="Button_Send">
-                    <materialDesign:PackIcon
-                    Foreground="#2D98D6"
-                    Kind="Send">
-                    </materialDesign:PackIcon>
-                </Button>
-            </StackPanel>
+
         </Grid>
     </materialDesign:Card>
 </Window>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp5"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="400" Width="647"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}"
         AllowsTransparency="True"
@@ -15,24 +15,29 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <materialDesign:Card
-            Background="#1E1E1E">
+        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+        UniformCornerRadius="20"
+        Background="#1E1E1E">
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="88"/>
+                <RowDefinition Height="88"/>
+                <RowDefinition Height="87"/>
+                <RowDefinition Height="87"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="50"></ColumnDefinition>
+                <ColumnDefinition Width="227"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="58.5"/>
+                <ColumnDefinition Width="141.5"/>
+                <ColumnDefinition Width="141.5"/>
+                <ColumnDefinition Width="58.5"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock
+                Grid.ColumnSpan="2"
                 Grid.Row="0"
                 Grid.Column="0"
                 FontSize="14"
@@ -53,17 +58,29 @@
                 Click="Button_Exit">
                 <materialDesign:PackIcon
                     Foreground="Salmon"
-                    Kind="Close">
+                    Kind="Close"
+                    Height="20" 
+                    Width="20">
                 </materialDesign:PackIcon>
             </Button>
 
             <Rectangle
+                Grid.ColumnSpan="2"
                 Grid.RowSpan="5"
                 Fill="Salmon"
-                Panel.ZIndex="-1">
-            </Rectangle>
+                Panel.ZIndex="-1"
+                RadiusX="20"
+                RadiusY="20"/>
+
+            <Rectangle
+                Grid.Column="1"
+                Grid.RowSpan="5"
+                Fill="Salmon"
+                Panel.ZIndex="-1"/>
+
 
             <TextBox
+                Grid.ColumnSpan="2"
                 materialDesign:HintAssist.Hint="IP"
                 materialDesign:HintAssist.Foreground="#1E1E1E"
                 materialDesign:HintAssist.Background="Salmon"
@@ -78,10 +95,11 @@
                 Width="200"
                 Grid.Row="1"
                 FontSize="12"
-                Name="IP_Client">
-            </TextBox>
+                Name="IP_Client"/>
+
 
             <TextBox
+                Grid.ColumnSpan="2"
                 materialDesign:HintAssist.Hint="Port"
                 materialDesign:HintAssist.Foreground="#1E1E1E"
                 materialDesign:HintAssist.Background="Salmon"
@@ -96,10 +114,11 @@
                 Width="200"
                 Grid.Row="2"
                 FontSize="12"
-                Name="Port_Client">
-            </TextBox>
+                Name="Port_Client"/>
+
 
             <Button
+                Grid.ColumnSpan="2"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}"
                 materialDesign:ButtonAssist.CornerRadius="15"
                 VerticalAlignment="Center"
@@ -110,10 +129,11 @@
                 Width="120"
                 Grid.Row="3"
                 Name="Connect_Server"
-                Click="Button_Connect_Server">
-            </Button>
+                Click="Button_Connect_Server"/>
+
 
             <Button
+                Grid.ColumnSpan="2"
                 Style="{StaticResource MaterialDesignFlatButton}"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                 materialDesign:ButtonAssist.CornerRadius="15"
@@ -125,8 +145,8 @@
                 IsEnabled="False"
                 Width="120"
                 Grid.Row="4"
-                Click="Button_Disconnect_Server">
-            </Button>
+                Click="Button_Disconnect_Server"/>
+
 
             <TextBox
                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
@@ -134,18 +154,38 @@
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Left"
                 Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 Grid.RowSpan="3"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 Background="#1E1E1E"
-                Foreground="Salmon"
-                CaretBrush="Salmon"
-                SelectionBrush="#1E1E1E"
+                Foreground="White"
+                CaretBrush="Transparent"
+                SelectionBrush="White"
                 FontSize="12"
                 IsReadOnly="True"
                 IsReadOnlyCaretVisible="True"
-                Name="Messages">
-            </TextBox>
+                Name="Messages"/>
+
+
+            <TextBox
+                Name="My_Messages"
+                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
+                BorderThickness="0"
+                VerticalContentAlignment="Top"
+                HorizontalContentAlignment="Right"
+                Grid.Row="1"
+                Grid.Column="4"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="4"
+                Background="#1E1E1E"
+                Foreground="White"
+                CaretBrush="Transparent"
+                SelectionBrush="White"
+                FontStretch="UltraExpanded"
+                FontSize="12"
+                IsReadOnly="True"
+                IsReadOnlyCaretVisible="True"/>
+
 
             <TextBox
                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
@@ -153,52 +193,29 @@
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Left"
                 Grid.Row="4"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Background="#1E1E1E"
-                Foreground="Salmon"
-                CaretBrush="Salmon"
-                SelectionBrush="#1E1E1E"
+                Grid.Column="2"
+                Grid.ColumnSpan="4"
+                Background="Transparent"
+                Foreground="White"
+                CaretBrush="White"
+                SelectionBrush="White"
                 AcceptsReturn="True"
                 TextWrapping="Wrap"
                 MaxLength="500"
                 Name="Send_Message"
-                PreviewKeyDown="Button_Send_Enter">
-            </TextBox>
+                PreviewKeyDown="Button_Send_Enter"/>
+
 
             <Rectangle
                 Panel.ZIndex="1"
                 Grid.Column="1"
                 Grid.Row="3"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="5"
                 Grid.RowSpan="4"
                 Height="1"
-                Fill="Salmon">
-            </Rectangle>
+                Fill="Salmon"/>
 
-            <StackPanel
-                Orientation="Horizontal"
-                Background="#1E1E1E"
-                Grid.Row="4"
-                Grid.Column="3">
-                <Button
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Background="Transparent"
-                    Width="30"
-                    Height="30"
-                    BorderThickness="0"
-                    Padding="0"
-                    Margin="10"
-                    Name="Send"
-                    Click="Button_Send_Message">
-                    <materialDesign:PackIcon
-                    Foreground="Salmon"
-                    Kind="Send">
-                    </materialDesign:PackIcon>
-                </Button>
-            </StackPanel>
-            
+
         </Grid>
     </materialDesign:Card>
 </Window>
