@@ -6,7 +6,7 @@ using SuperSimpleTcp;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
 using System.Windows.Controls;
-using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace ServerApp
 {
@@ -41,6 +41,7 @@ namespace ServerApp
 
         public string FullAdress { get; set; }
 
+        string time = DateTime.Now.ToShortTimeString();
         public void Button_Start_Server(object sender, RoutedEventArgs e)
         {
             string[] ArrayAdress = {IP_Server.Text, ":", Port_Server.Text };
@@ -59,8 +60,7 @@ namespace ServerApp
                     {
                         Server = new SimpleTcpServer(FullAdress);
 
-                        Messages.Text += $"{Environment.NewLine}$Server started"; //delete this and make 
-                        Messages.Text = string.Empty;
+                        Messages.Items.Clear();
 
                         Load();
                         Server.Start();
@@ -72,9 +72,9 @@ namespace ServerApp
                         Block();
                     }
                 }
-                else Messages.Text += $"{Environment.NewLine}$Enter correct IP and Port";
+                else Messages.Items.Add($"{time}{Environment.NewLine}$Enter correct IP and Port");
             }
-            else Messages.Text += $"{Environment.NewLine}$Enter correct IP and Port";
+            else Messages.Items.Add($"{time}{Environment.NewLine}$Enter correct IP and Port");
         }
         public void Button_Stop_Server(object sender, RoutedEventArgs e)
         {
@@ -83,7 +83,7 @@ namespace ServerApp
                 Server.Send(item, "$Server stopped");
             }
             lstIp.Items.Clear();
-            Messages.Text = string.Empty;
+            Messages.Items.Clear();
             ServerIsWork = false;
             Start_Server.IsEnabled = true;
             Stop_Server.IsEnabled = false;
@@ -107,7 +107,8 @@ namespace ServerApp
                         }
                         finally 
                         {
-                            My_Messages.Text += $"{Environment.NewLine}{Send_Message.Text}";
+                            Messages.Items.Add($"{time}{Environment.NewLine}{Send_Message.Text}");
+                            UpdateScrollBar(Messages);
                             Send_Message.Text = string.Empty;
                             e.Handled = true;
                         }
@@ -127,7 +128,7 @@ namespace ServerApp
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Messages.Text += $"{Environment.NewLine}[{e.IpPort}]: {Encoding.UTF8.GetString(e.Data)}";
+                    Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}]: {Encoding.UTF8.GetString(e.Data)}");
                 }));
                 string tempIp = e.IpPort;
                 foreach (string item in lstIp.Items)
@@ -145,7 +146,7 @@ namespace ServerApp
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Messages.Text += $"{Environment.NewLine}[{e.IpPort}] disconnected";
+                    Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}] disconnected");
                     lstIp.Items.Remove(e.IpPort);
                 }));
             }
@@ -156,9 +157,18 @@ namespace ServerApp
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Messages.Text += $"{Environment.NewLine}[{e.IpPort}] connected";
+                    Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}] connected");
                     lstIp.Items.Add(e.IpPort);
                 }));
+            }
+        }
+        private void UpdateScrollBar(ListBox listBox)
+        {
+            if (listBox != null)
+            {
+                var border = (Border)VisualTreeHelper.GetChild(listBox, 0);
+                var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                scrollViewer.ScrollToBottom();
             }
         }
     }

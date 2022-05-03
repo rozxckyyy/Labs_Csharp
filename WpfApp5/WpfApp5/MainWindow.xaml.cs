@@ -1,19 +1,11 @@
 ﻿using SuperSimpleTcp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace WpfApp5
@@ -49,6 +41,8 @@ namespace WpfApp5
         public bool ServerIsConnect = false;
         public bool DeleteRequest;
         public string FullAdress { get; set; }
+
+        string time = DateTime.Now.ToShortTimeString();
         public void Button_Connect_Server(object sender, RoutedEventArgs e)
         {
             string[] ArrayAdress = { IP_Client.Text, ":", Port_Client.Text };
@@ -68,11 +62,7 @@ namespace WpfApp5
 
                         ServerIsConnect = Client.IsConnected;
                     }
-                    catch
-                    {
-                        Messages.Text += $"{Environment.NewLine}$Server is not connected";
-                        ServerIsConnect = false;
-                    }
+                    catch { ServerIsConnect = false; }
                     finally
                     {
                         Load();
@@ -80,36 +70,24 @@ namespace WpfApp5
                         Connect_Server.IsEnabled = false;
                         Disconnect_Server.IsEnabled = true;
 
-                        Messages.Text += $"{Environment.NewLine}$Server connected";
+                        Messages.Items.Clear();
 
                         Block();
                     }
                 }
-                else Messages.Text += $"{Environment.NewLine}$Enter correct IP and Port";
+                else Messages.Items.Add($"{time}{Environment.NewLine}$Enter correct IP and Port");
             }
-            else Messages.Text += $"{Environment.NewLine}$Enter correct IP and Port";
+            else Messages.Items.Add($"{time}{Environment.NewLine}$Enter correct IP and Port");
         }
         public void Button_Disconnect_Server(object sender, RoutedEventArgs e)
         {
-            Messages.Text += $"{Environment.NewLine}$You disconnected";
+            Messages.Items.Clear();
             ServerIsConnect = false;
             Connect_Server.IsEnabled = true;
             Disconnect_Server.IsEnabled = false;
             Unblock();
             Client.Disconnect();
             
-        }
-        private void Button_Send_Message(object sender, RoutedEventArgs e)
-        {
-            if (Client.IsConnected)
-            {
-                if (!string.IsNullOrEmpty(Send_Message.Text))
-                {
-                    Client.Send(Send_Message.Text);
-                    Messages.Text += $"{Environment.NewLine}You: {Send_Message.Text}";
-                    Send_Message.Text = string.Empty;
-                }
-            }
         }
         private void Button_Send_Enter(object sender, KeyEventArgs e)
         {
@@ -120,7 +98,8 @@ namespace WpfApp5
                     if (e.Key == Key.Enter)
                     {
                         Client.Send(Send_Message.Text);
-                        Messages.Text += $"{Environment.NewLine}You: {Send_Message.Text}";
+                        Messages.Items.Add($"{time}{Environment.NewLine}{Send_Message.Text}");
+                        UpdateScrollBar(Messages);
                         Send_Message.Text = string.Empty;
                         e.Handled = true;
                     }
@@ -145,7 +124,7 @@ namespace WpfApp5
                 {
                     Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                     {
-                        Messages.Text += $"{Environment.NewLine}{Encoding.UTF8.GetString(e.Data)}";
+                        Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}]: {Encoding.UTF8.GetString(e.Data)}");
                     }));
                 }
             }
@@ -157,7 +136,7 @@ namespace WpfApp5
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Messages.Text += $"{Environment.NewLine}[{e.IpPort}] disconnected";
+                    Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}] disconnected");
                 }));
             }
         }
@@ -168,10 +147,18 @@ namespace WpfApp5
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Messages.Text += $"{Environment.NewLine}[{e.IpPort}] connected";
+                    Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}] connected");
                 }));
             }
-        }        
+        }
+        private void UpdateScrollBar(ListBox listBox)
+        {
+            if (listBox != null)
+            {
+                var border = (Border)VisualTreeHelper.GetChild(listBox, 0);
+                var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
+                scrollViewer.ScrollToBottom();
+            }
+        }
     }
-
 }

@@ -36,6 +36,7 @@
                 <ColumnDefinition Width="58.5"/>
             </Grid.ColumnDefinitions>
 
+            
             <TextBlock
                 Grid.ColumnSpan="2"
                 Grid.Row="0"
@@ -46,6 +47,7 @@
                 <Run Text="TCP/" Foreground="#1E1E1E" FontWeight="DemiBold"/><Run Text="client" Foreground="#1E1E1E"/>
             </TextBlock>
 
+            
             <Button
                 Grid.Column="5"
                 HorizontalAlignment="Center"
@@ -64,6 +66,7 @@
                 </materialDesign:PackIcon>
             </Button>
 
+            
             <Rectangle
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="5"
@@ -72,6 +75,7 @@
                 RadiusX="20"
                 RadiusY="20"/>
 
+            
             <Rectangle
                 Grid.Column="1"
                 Grid.RowSpan="5"
@@ -131,7 +135,7 @@
                 Name="Connect_Server"
                 Click="Button_Connect_Server"/>
 
-
+            
             <Button
                 Grid.ColumnSpan="2"
                 Style="{StaticResource MaterialDesignFlatButton}"
@@ -148,43 +152,25 @@
                 Click="Button_Disconnect_Server"/>
 
 
-            <TextBox
-                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
-                BorderThickness="0"
-                VerticalContentAlignment="Top"
-                HorizontalContentAlignment="Left"
+            <ListBox
+                Name="Messages"
                 Grid.Row="1"
+                Grid.RowSpan="3"
                 Grid.Column="2"
-                Grid.RowSpan="3"
-                Grid.ColumnSpan="2"
-                Background="#1E1E1E"
-                Foreground="White"
-                CaretBrush="Transparent"
-                SelectionBrush="White"
-                FontSize="12"
-                IsReadOnly="True"
-                IsReadOnlyCaretVisible="True"
-                Name="Messages"/>
-
-
-            <TextBox
-                Name="My_Messages"
-                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
-                BorderThickness="0"
-                VerticalContentAlignment="Top"
-                HorizontalContentAlignment="Right"
-                Grid.Row="1"
-                Grid.Column="4"
-                Grid.RowSpan="3"
                 Grid.ColumnSpan="4"
-                Background="#1E1E1E"
                 Foreground="White"
-                CaretBrush="Transparent"
-                SelectionBrush="White"
-                FontStretch="UltraExpanded"
                 FontSize="12"
-                IsReadOnly="True"
-                IsReadOnlyCaretVisible="True"/>
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                materialDesign:ListBoxItemAssist.ShowSelection="False">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Text="{Binding}"
+                            TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
             <TextBox

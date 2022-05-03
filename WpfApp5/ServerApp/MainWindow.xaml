@@ -38,6 +38,7 @@
                 <ColumnDefinition Width="58.5"/>
             </Grid.ColumnDefinitions>
 
+            
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="0"
@@ -48,6 +49,7 @@
                 <Run Text="TCP/" Foreground="#1E1E1E" FontWeight="DemiBold"/><Run Text="server" Foreground="#1E1E1E"/>
             </TextBlock>
 
+            
             <materialDesign:PopupBox
                 Grid.Column="4"
                 HorizontalAlignment="Right"
@@ -67,11 +69,13 @@
                     <ListBox
                         HorizontalAlignment="Center"
                         Name="lstIp"
-                        Foreground="#2D98D6">
+                        Foreground="#2D98D6"
+                        materialDesign:ListBoxItemAssist.ShowSelection="False">
                     </ListBox>
                 </StackPanel>
             </materialDesign:PopupBox>
 
+            
             <Button
                 Grid.Column="5"
                 HorizontalAlignment="Center"
@@ -90,6 +94,7 @@
                 </materialDesign:PackIcon>
             </Button>
 
+            
             <Rectangle
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="5"
@@ -105,6 +110,7 @@
                 Fill="#2D98D6"
                 Panel.ZIndex="-1"/>
 
+            
             <TextBox
                 Grid.ColumnSpan="2"
                 Name="IP_Server"
@@ -174,44 +180,25 @@
                 Click="Button_Stop_Server"/>
 
 
-            <TextBox
+            <ListBox
                 Name="Messages"
-                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
-                BorderThickness="0"
-                VerticalContentAlignment="Top"
-                HorizontalContentAlignment="Left"
                 Grid.Row="1"
+                Grid.RowSpan="3"
                 Grid.Column="2"
-                Grid.RowSpan="3"
-                Grid.ColumnSpan="2"
-                Background="#1E1E1E"
+                Grid.ColumnSpan="4"
                 Foreground="White"
-                CaretBrush="Transparent"
-                SelectionBrush="White"
-                FontStretch="UltraExpanded"
                 FontSize="12"
-                IsReadOnly="True"
-                IsReadOnlyCaretVisible="True"/>
-
-
-            <TextBox
-                Name="My_Messages"
-                materialDesign:TextFieldAssist.DecorationVisibility="Hidden" 
-                BorderThickness="0"
-                VerticalContentAlignment="Top"
-                HorizontalContentAlignment="Right"
-                Grid.Row="1"
-                Grid.Column="4"
-                Grid.RowSpan="3"
-                Grid.ColumnSpan="4" 
-                Background="#1E1E1E"
-                Foreground="White"
-                CaretBrush="Transparent"
-                SelectionBrush="White"
-                FontStretch="UltraExpanded"
-                FontSize="12"
-                IsReadOnly="True"
-                IsReadOnlyCaretVisible="True"/>
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                materialDesign:ListBoxItemAssist.ShowSelection="False">
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Text="{Binding}"
+                            TextWrapping="Wrap"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
             <TextBox
