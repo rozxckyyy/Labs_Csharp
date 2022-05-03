@@ -124,7 +124,7 @@ namespace WpfApp5
                 {
                     Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                     {
-                        Messages.Items.Add($"{time}{Environment.NewLine}[{e.IpPort}]: {Encoding.UTF8.GetString(e.Data)}");
+                        Messages.Items.Add($"{time}{Environment.NewLine}{Encoding.UTF8.GetString(e.Data)}");
                     }));
                 }
             }
